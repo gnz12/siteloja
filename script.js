@@ -18,7 +18,7 @@ const produtos=[
  nome:"Camisa Brasil Amarela I Jogador 26/27",
  categoria:"masculino",
  preco:209.90,
- imagens: ["imagens/camisajogador2.jpg", "imagens/amajogador5.jpg", "imagens/amajogador1.jpg", "imagens/amajogador2.jpg", "imagens/amajogador3.jpg", "imagens/amajogador4.jpg", "imagens/amajogador6.jpg"],
+ imagens: ["imagens/camisajogador2.jpg", "imagens/amajogador5.jpg", "imagens/amajogador2.jpg", "imagens/amajogador3.jpg", "imagens/amajogador4.jpg", "imagens/amajogador6.jpg"],
  estoque:{P:5,M:5,G:10,GG:6}
 },
 {
@@ -80,8 +80,16 @@ function render(categoria = null){
  <h3>${p.nome}</h3>
  <div class="price">R$ ${p.preco}</div>
  <div class="stock">${tamanhos}</div>
- <select id="s${i}">${op}</select>
- <button onclick="add(${i})">Adicionar ao carrinho</button>
+ ${Object.values(p.estoque).some(qtd => qtd > 0) ? `
+    <select id="s${i}">${op}</select>
+    <button onclick="add(${i})">
+        Adicionar ao carrinho
+    </button>
+` : `
+    <div class="esgotado">
+        ❌ Produto esgotado
+    </div>
+`}
 
 </div>`;
  });
@@ -104,9 +112,11 @@ function add(i){
   });
 
   updateCart();
-  render();
+render();
 
- }else alert('Esgotado');
+mostrarToast('✅ Item adicionado ao carrinho!');
+
+ }else mostrarToast('❌ Produto esgotado');
 }
 
 function remover(index){
@@ -183,4 +193,18 @@ function trocar(i, direcao){
 
  document.getElementById(`img-${i}`).src =
   produtos[i].imagens[indexImagem[i]];
+}
+
+function mostrarToast(msg){
+
+ const toast = document.getElementById('toast');
+
+ toast.innerText = msg;
+
+ toast.classList.add('show');
+
+ setTimeout(()=>{
+   toast.classList.remove('show');
+ },2000);
+
 }
