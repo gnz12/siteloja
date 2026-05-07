@@ -1,0 +1,349 @@
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ font-family:'Montserrat',sans-serif;
+}
+
+body{
+ background:#3676ff;
+ color:#111;
+}
+
+/* HEADER */
+header{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:20px 40px;
+ border-bottom:1px solid #eee;
+}
+
+.logo img {
+  height: 100px;
+}
+
+nav a{
+ margin:0 15px;
+ text-decoration:none;
+ color:#ffffff;
+ font-weight:600;
+}
+
+.search{
+ border:1px solid #ddd;
+ padding:8px 12px;
+ border-radius:20px;
+}
+
+/* BANNER */
+.banner{
+ height: 580px;
+ background:
+ linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+ url('imagens/banner-site.png') center/cover;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ color:#fff;
+ font-size:28px;
+ font-weight:800;
+}
+
+/* LAYOUT */
+.container{
+ display:flex;
+ padding:30px;
+}
+
+.sidebar{
+ width:220px;
+}
+
+.products{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    padding:30px;
+    max-width:1400px;
+    margin:auto;
+}
+
+.card{
+    width:200px;
+}
+
+/* CARD */
+.card{
+ cursor:pointer;
+ color: #eee;
+}
+
+.card-img{
+ position:relative;
+ overflow:hidden;
+}
+
+.card-img img{
+ width:100%;
+ height:300px;
+ object-fit:cover;
+ transition:.4s;
+}
+
+
+.card h3{
+ font-size:14px;
+ margin:10px 0 5px;
+}
+
+.price{
+ font-weight:700;
+ color: #eee;
+}
+
+.stock{
+ font-size:11px;
+ color:#ffffff;
+ margin:5px 0;
+}
+
+/* FORM */
+select{
+ width:100%;
+ padding:8px;
+ margin-top:5px;
+ border:1px solid #ddd;
+}
+
+button{
+ width:100%;
+ padding:10px;
+ margin-top:8px;
+ background:#000;
+ color:#fff;
+ border:none;
+ cursor:pointer;
+ font-weight:600;
+}
+
+button:hover{
+ background:#333;
+}
+
+/* CART */
+
+.cart-btn{
+ color:#fff;
+ padding:8px 12px;
+ border-radius:20px;
+}
+
+.cart-btn:hover{
+ background:rgba(255,255,255,0.15);
+}
+
+.cart{
+ position:fixed;
+ top:0;
+ right:-350px;
+ width:350px;
+ height:100%;
+ background:#fff;
+ box-shadow:-5px 0 20px rgba(0, 0, 0, 0.1);
+ transition:.3s;
+ padding:20px;
+ display:flex;
+ flex-direction:column;
+}
+
+.cart.open{
+ right:0;
+}
+
+.cart h2{
+ margin-bottom:15px;
+ color: #494949;
+}
+
+.cart-items{
+ flex:1;
+ overflow:auto;
+}
+
+.cart-item{
+ font-size:13px;
+ margin-bottom:10px;
+}
+
+.cart button{
+ background:#1eff00e0;
+}
+
+.cart-btn{
+ color:#000;
+}
+.close-cart{
+ float:right;
+ cursor:pointer;
+ font-size:18px;
+ font-weight:bold;
+}
+
+.close-cart:hover{
+ color:red;
+}
+
+.carousel{
+ position:relative;
+}
+
+.carousel img{
+ width:100%;
+ height:300px;
+ object-fit:cover;
+ display:block;
+}
+
+/* BOTÕES */
+.carousel button{
+ position:absolute;
+ top:50%;
+ transform:translateY(-50%);
+ width:35px;
+ height:35px;
+ border-radius:50%;
+ background:rgba(0,0,0,0.1);
+ color:#fff;
+ border:none;
+ cursor:pointer;
+ font-size:18px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+/* POSIÇÃO */
+.prev{
+ left:10px;
+}
+
+.next{
+ right:10px;
+}
+
+.carousel{
+ position:relative;
+ overflow:hidden;
+ border-radius:10px;
+}
+
+.carousel img{
+ width:100%;
+ height:300px;
+ object-fit:cover;
+ transition:transform 0.4s ease;
+ cursor:zoom-in;
+}
+
+/* ZOOM */
+.carousel:hover img{
+ transform:scale(1.15);
+}
+nav a{
+ text-decoration:none;
+ color:white;
+ margin:0 15px;
+ font-weight:600;
+ transition:0.3s;
+}
+
+nav a:hover{
+ opacity:0.7;
+}
+.home-products{
+    justify-content:center;
+    max-width:1600px;
+    margin:auto;
+}
+
+/* RESPONSIVO MOBILE */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+@media (max-width: 768px){
+
+header{
+    flex-direction:column;
+    gap:15px;
+    padding:15px;
+}
+
+nav{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+@media(max-width:768px){
+
+  .banner{
+    height:100px;
+    background-size:contain;
+    background-position:center;
+    margin:0;
+    padding:0;
+  }
+
+}
+.products,
+.home-products{
+    display:grid;
+    grid-template-columns: 4fr ;
+    gap:15px;
+    padding:15px;
+}
+
+.card{
+    width:100%;
+}
+
+.carousel img{
+    width:100%;
+    height:300px;
+    object-fit:contain;
+    background:#f5f5f5;
+    border-radius:12px;
+}
+
+h3{
+    font-size:14px;
+}
+
+.price{
+    font-size:20px;
+}
+
+button{
+    padding:12px;
+    font-size:14px;
+}
+
+select{
+    padding:10px;
+}
+
+.cart{
+    width:80%;
+}
+
+.search{
+    width:100%;
+}
+
+}
