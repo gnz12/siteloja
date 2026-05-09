@@ -3,6 +3,7 @@ const produtos=[
     nome: "Camisa Brasil Amarela I 26/27",
     preco: 149.90,
     categoria:"masculino",
+    time:"brasil",
     // Agora temos uma lista de imagens
     imagens: ["brasilmasculino/camisa1.jpg", "brasilmasculino/camisa1-2.jpg", "brasilmasculino/camisa1-3.jpg", "brasilmasculino/camisa1-4.jpg"],
     estoque: { P: 5, M: 5, G: 10, GG: 6 }
@@ -11,12 +12,14 @@ const produtos=[
  nome:"Camisa Brasil Jordan II 26/27",
  preco:149.90,
  categoria:"masculino",
+ time:"brasil",
  imagens: ["brasilmasculino/camisa2.jpg", "brasilmasculino/azul2.jpg", "brasilmasculino/azul3.jpg", "brasilmasculino/azul4.jpg"],
  estoque:{P:5,M:5,G:10,GG:6}
 },
 {
  nome:"Camisa Brasil Amarela I Jogador 26/27",
  categoria:"masculino",
+ time:"brasil",
  preco:209.90,
  imagens: ["brasilmasculino/camisajogador2.jpg", "brasilmasculino/amajogador5.jpg", "brasilmasculino/amajogador2.jpg", "brasilmasculino/amajogador3.jpg", "brasilmasculino/amajogador4.jpg", "brasilmasculino/amajogador6.jpg"],
  estoque:{P:5,M:5,G:10,GG:6}
@@ -25,6 +28,7 @@ const produtos=[
  nome:"Camisa Brasil Jordan II Jogador 26/27",
  preco:209.90,
  categoria:"masculino",
+ time:"brasil",
  imagens: ["brasilmasculino/camisetajogador1.jpg", "brasilmasculino/azuljogador5.jpg", "brasilmasculino/azuljogador2.jpg", "brasilmasculino/azuljogador3.jpg", "brasilmasculino/azuljogador4.jpg"],
  estoque:{P:5,M:5,G:10,GG:6}
 },
@@ -32,6 +36,7 @@ const produtos=[
  nome:"Camisa Brasil I Torcedora 2026/27",
  preco:149.90,
  categoria:"feminino",
+ time:"brasil",
  imagens: ["brasilfeminino/femininamarela.jpg", "brasilfeminino/femininaama1.jpg", "brasilfeminino/femininaama2.jpg", "brasilfeminino/femininaama3.jpg", "brasilfeminino/femininaama4.jpg", "brasilfeminino/femininaama5.jpg" ],
  estoque:{P:5,M:5,G:10,GG:6}
 },
@@ -39,6 +44,7 @@ const produtos=[
  nome:"Camisa Brasil Jordan II Torcedora 2026/27",
  preco:149.90,
  categoria:"feminino",
+  time:"brasil",
  imagens: ["brasilfeminino/feminina1.jpg", "brasilfeminino/feminina2.jpg", "brasilfeminino/feminina3.jpg", "brasilfeminino/feminina4.jpg", "brasilfeminino/feminina5.jpg"],
  estoque:{P:5,M:5,G:10,GG:6}
 },
