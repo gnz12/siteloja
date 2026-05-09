@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Produto</title>
+
+<header>
+ <div class="logo">
+  <img src="imagens/logo.png" alt="">
+ </div>
+
+ 
+ <nav>
+  <a href="index.html">Início</a>
+  <a href="masculino.html">Masculino</a>
+  <a href="feminino.html">Feminino</a>
+
+  <!-- BOTÃO MENU -->
+  <div class="menu-btn" onclick="abrirMenu()">
+    ☰
+  </div>
+</nav>
+
+
+<div id="sidebar" class="sidebar-menu">
+
+  <span class="fechar" onclick="fecharMenu()">✕</span>
+
+  <!-- TIMES BRASILEIROS -->
+  <div class="menu-category">
+    <h3>Times Brasileiros</h3>
+
+    <a href="corinthians.html">Corinthians</a>
+  </div>
+
+  <!-- SELEÇÕES -->
+  <div class="menu-category">
+    <h3> Seleções</h3>
+
+    <a href="brasil.html">Brasil</a>
+  </div>
+
+  <!-- EUROPEUS -->
+  <div class="menu-category">
+    <h3> Europeus</h3>
+
+    <a href="milan.html">Milan</a>
+    
+  </div>
+
+  </div>
+
+ <div>
+  <span class="cart-btn" onclick="toggleCart()">🛒 Carrinho (<span id="count">0</span>)</span>
+ </div>
+</header>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="produto-page">
+
+  <div class="produto-imagens" id="produtoImagens"></div>
+
+  <div class="produto-info">
+
+    <h1 id="produtoNome"></h1>
+
+    <div class="produto-preco" id="produtoPreco"></div>
+
+    <div class="produto-stock" id="produtoStock"></div>
+
+    <select id="produtoTamanho"></select>
+
+    <button onclick="comprarProduto()">
+      Adicionar ao carrinho
+    </button>
+
+    <div class="cart" id="cart">
+
+  <h2>
+    Seu Carrinho
+    <span class="close-cart"
+    onclick="toggleCart()">✖</span>
+  </h2>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <button type="button"
+  onclick="finalizar()">
+    Finalizar no WhatsApp
+  </button>
+
+  <span class="cart-btn" onclick="toggleCart()">
+ 🛒 Carrinho (<span id="count">0</span>)
+</span>
+
+</div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+ render();
+ updateCart();
+</script>
+
+<script>
+
+updateCart();
+
+const index = localStorage.getItem('produtoSelecionado');
+
+const p = produtos[index];
+
+document.getElementById('produtoNome')
+.innerText = p.nome;
+
+document.getElementById('produtoPreco')
+.innerText = `R$ ${p.preco}`;
+
+document.getElementById('produtoStock')
+.innerText =
+Object.keys(p.estoque)
+.map(t => `${t}(${p.estoque[t]})`)
+.join(' • ');
+
+document.getElementById('produtoTamanho')
+.innerHTML =
+Object.keys(p.estoque)
+.map(t => `<option>${t}</option>`)
+.join('');
+
+document.getElementById('produtoImagens')
+.innerHTML =
+p.imagens.map(img => `
+  <img src="${img}">
+`).join('');
+
+function comprarProduto(){
+
+ let size =
+ document.getElementById('produtoTamanho').value;
+
+ if(p.estoque[size] > 0){
+
+   p.estoque[size]--;
+
+   carrinho.push({
+     nome:p.nome,
+     preco:p.preco,
+     size,
+     index:index
+   });
+
+   localStorage.setItem(
+    'carrinho',
+    JSON.stringify(carrinho)
+   );
+
+   updateCart();
+
+   mostrarToast('✅ Item adicionado!');
+
+ }else{
+
+   mostrarToast('❌ Produto esgotado');
+
+ }
+
+}
+
+</script>
+
+</script>
+
+<div id="toast"></div>
+
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-logo">
+      <h2>TIGER SPORTS</h2>
+      <p>Loja Oficial • Futebol </p>
+    </div>
+
+    <div class="footer-links">
+      <a href="index.html">Início</a>
+      <a href="masculino.html">Masculino</a>
+      <a href="feminino.html">Feminino</a>
+    </div>
+
+    <div class="footer-contact">
+      <p>📱 WhatsApp 15998443835</p>
+      <p>🚚 Enviamos para todo Brasil</p>
+      <p>🔒 Compra Segura</p>
+    </div>
+
+  </div>
+
+  <div class="footer-copy">
+    © 2026 TIGER SPORTS - Todos os direitos reservados
+  </div>
+
+</footer>
+
+</body>
+</html>

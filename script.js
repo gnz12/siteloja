@@ -78,7 +78,8 @@ const produtos=[
 
 ];
 
-let carrinho=[];
+let carrinho =
+JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function render(categoria = null, time = null){
 
@@ -107,7 +108,7 @@ function render(categoria = null, time = null){
   .join('');
 
   html+=`
-<div class="card">
+<div class="card" onclick="abrirProduto(${i})">
 
  <div class="carousel" onclick="abrirProduto(${i})">
   
@@ -123,9 +124,11 @@ function render(categoria = null, time = null){
  <div class="price">R$ ${p.preco}</div>
  <div class="stock">${tamanhos}</div>
  ${Object.values(p.estoque).some(qtd => qtd > 0) ? `
-    <select id="s${i}">${op}</select>
-    <button onclick="add(${i})">
-        Adicionar ao carrinho
+    <select id="s${i}" onclick="event.stopPropagation()">
+      ${op}
+    </select>
+    <button onclick="event.stopPropagation(); add(${i})">
+      Adicionar ao carrinho
     </button>
 ` : `
     <div class="esgotado">
@@ -140,57 +143,91 @@ function render(categoria = null, time = null){
 }
 
 function add(i){
- let size=document.getElementById(`s${i}`).value;
 
- if(produtos[i].estoque[size]>0){
+ let size = document.getElementById(`s${i}`).value;
+
+ if(produtos[i].estoque[size] > 0){
 
   produtos[i].estoque[size]--;
 
   carrinho.push({
-    nome:produtos[i].nome,
-    size,
-    preco:produtos[i].preco,
-    index:i
+   nome: produtos[i].nome,
+   preco: produtos[i].preco,
+   size: size,
+   index: i
   });
 
+  localStorage.setItem(
+   'carrinho',
+   JSON.stringify(carrinho)
+  );
+
   updateCart();
-render();
 
-mostrarToast('✅ Item adicionado ao carrinho!');
+  mostrarToast('✅ Item adicionado ao carrinho!');
 
- }else mostrarToast('❌ Produto esgotado');
+ }else{
+
+  mostrarToast('❌ Produto esgotado');
+
+ }
+
 }
 
 function remover(index){
+
  let item=carrinho[index];
 
  produtos[item.index].estoque[item.size]++;
 
  carrinho.splice(index,1);
 
+ localStorage.setItem(
+  'carrinho',
+  JSON.stringify(carrinho)
+ );
+
  updateCart();
  render();
 }
 
 function updateCart(){
- document.getElementById('count').innerText=carrinho.length;
 
- let html="";
- let total=0;
+ document.getElementById('count').innerText =
+ carrinho.length;
+
+ let html = "";
+ let total = 0;
 
  carrinho.forEach((p,i)=>{
-  total+=p.preco;
 
-  html+=`
-  <div class='cart-item'>
-   ${p.nome} - ${p.size} - R$ ${p.preco}
-   <button onclick="remover(${i})">❌</button>
-  </div>`;
+  total += Number(p.preco);
+
+  html += `
+   <div class='cart-item'>
+
+    <p>${p.nome}</p>
+
+    <p>Tamanho: ${p.size}</p>
+
+    <p>R$ ${p.preco}</p>
+
+    <button onclick="remover(${i})">
+      ❌
+    </button>
+
+   </div>
+  `;
+
  });
 
- html+=`<hr><strong>Total: R$ ${total.toFixed(2)}</strong>`;
+ html += `
+  <hr>
+  <strong>Total: R$ ${total.toFixed(2)}</strong>
+ `;
 
- document.getElementById('cartItems').innerHTML=html;
+ document.getElementById('cartItems').innerHTML =
+ html;
 }
 
 function toggleCart(){
@@ -259,4 +296,47 @@ function abrirMenu(){
 function fecharMenu(){
     document.getElementById('sidebar')
     .classList.remove('open');
+}
+
+function abrirProduto(i){
+
+ localStorage.setItem('produtoSelecionado', i);
+
+ window.location.href = 'produto.html';
+
+}
+
+updateCart();
+
+function comprarProduto(){
+
+ let size =
+ document.getElementById('produtoTamanho').value;
+
+ if(p.estoque[size] > 0){
+
+   p.estoque[size]--;
+
+   carrinho.push({
+     nome:p.nome,
+     preco:p.preco,
+     size,
+     index: localStorage.getItem('produtoSelecionado')
+   });
+
+   localStorage.setItem(
+    'carrinho',
+    JSON.stringify(carrinho)
+   );
+
+   updateCart();
+
+   mostrarToast('✅ Item adicionado!');
+
+ }else{
+
+   mostrarToast('❌ Produto esgotado');
+
+ }
+
 }
