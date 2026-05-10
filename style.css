@@ -190,7 +190,7 @@ nav a{
 .banner{
  height: 580px;
  background:
- linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+ linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),
  url('imagens/banner-site.png') center/cover;
  display:flex;
  align-items:center;
